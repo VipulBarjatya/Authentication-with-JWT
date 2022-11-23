@@ -1,4 +1,4 @@
-# LOGIN/REGISTER Authentication
+# LOGIN/REGISTER Authentication with JWT
 
 ## GOAL
 
