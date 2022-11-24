@@ -1,13 +1,16 @@
+require("dotenv").config();
 require("./config/database.js").connect();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 
+// custom Middleware
+const auth = require("./middleware/auth");
+
 // import model(user)
 const User = require("./model/user");
-const { urlencoded } = require("express");
-const user = require("./model/user");
+// const { urlencoded, request } = require("express");
 
 const app = express();
 app.use(express.json());
@@ -105,6 +108,8 @@ app.post("/login", async (req, res) => {
   } catch (error) {}
 });
 
-app.get("/dashboard", auth (req, res) => {
-  
+app.get("/dashboard", auth, (req, res) => {
+  return res.send("Welcome to dashboard");
 });
+
+module.exports = app;
