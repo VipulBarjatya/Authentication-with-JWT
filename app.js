@@ -2,6 +2,7 @@ require("./config/database.js").connect();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 
 // import model(user)
 const User = require("./model/user");
@@ -11,6 +12,7 @@ const user = require("./model/user");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Hello Auth System");
@@ -101,4 +103,8 @@ app.post("/login", async (req, res) => {
 
     // create token and send
   } catch (error) {}
+});
+
+app.get("/dashboard", auth (req, res) => {
+  
 });
