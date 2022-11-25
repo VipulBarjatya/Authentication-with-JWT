@@ -75,7 +75,7 @@ app.post("/login", async (req, res) => {
       res.status(402).send("please fill correct credentials");
     }
     // check user in database
-    const newUser = User.findOne({ email: email });
+    const newUser = await User.findOne({ email });
     // If user does not exist in database
     if (!newUser) {
       res.status(402).send("User not found in database");
@@ -85,7 +85,7 @@ app.post("/login", async (req, res) => {
       const token = jwt.sign(
         {
           id: newUser.id,
-          email: email,
+          email,
         },
         "shhhhh",
         { expiresIn: "2h" }
